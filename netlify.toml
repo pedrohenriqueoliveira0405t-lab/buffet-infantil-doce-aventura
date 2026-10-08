@@ -1,0 +1,9 @@
+# Configuração de build no Netlify. O Netlify detecta o Next.js e aplica o
+# adaptador oficial automaticamente (não usar `next export`, removido do Next.js).
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  # Next.js 16 exige Node.js 20.9 ou superior.
+  NODE_VERSION = "22"
