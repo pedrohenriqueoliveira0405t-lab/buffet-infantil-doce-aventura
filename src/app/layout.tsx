@@ -64,11 +64,18 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="pt-BR" data-scroll-behavior="smooth" className={`${display.variable} ${sans.variable}`}>
-      <head>
-        {/* Google Consent Mode v2: padrão "negado" antes de qualquer tag carregar. */}
-        <script id="consent-defaults" dangerouslySetInnerHTML={{ __html: consentDefaultsScript }} />
-      </head>
       <body className="min-h-dvh">
+        {/*
+          Google Consent Mode v2: padrão "negado" antes de qualquer tag carregar.
+          `beforeInteractive` injeta o script no <head> e o executa antes do código do Next,
+          fora da árvore que o React hidrata. (Um <script> escrito direto no <head> quebrava a
+          hidratação no Netlify, que insere um comentário e uma quebra de linha no <head>.)
+        */}
+        <Script
+          id="consent-defaults"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: consentDefaultsScript }}
+        />
         {hasGtm && (
           <noscript>
             <iframe
