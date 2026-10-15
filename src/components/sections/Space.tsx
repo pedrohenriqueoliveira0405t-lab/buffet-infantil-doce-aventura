@@ -39,7 +39,7 @@ export function Space() {
           <Carousel
             label="Áreas do espaço"
             itemLabels={space.areas.map((area) => area.name)}
-            autoplay={4000}
+            autoplay={3000}
             className="mt-section-gap"
             controlsClassName="md:hidden"
             listClassName="md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:pt-0 md:pb-0 lg:grid-cols-4 lg:grid-rows-[18rem_18rem]"

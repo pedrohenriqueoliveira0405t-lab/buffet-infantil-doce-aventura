@@ -46,7 +46,7 @@ export function PhotoSlideshow({
   sizes,
   className,
   preloadFirst = false,
-  interval = 3500,
+  interval = 2500,
   controlsClassName,
 }: PhotoSlideshowProps) {
   const rootRef = useRef<HTMLDivElement>(null);
