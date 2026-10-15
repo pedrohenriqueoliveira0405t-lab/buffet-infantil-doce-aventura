@@ -6,6 +6,8 @@ import { useEffect, useRef } from "react";
 const BOTTOM_GAP = 28;
 /** Inércia: fração da distância percorrida por quadro (menor = flutua com mais atraso). */
 const EASE = 0.09;
+/** Largura mínima da tela (px) para o balão aparecer: no mobile ele fica escondido. */
+const MIN_WIDTH = 768;
 
 /**
  * Balão decorativo que "se solta" da logo e acompanha a rolagem.
@@ -14,8 +16,7 @@ const EASE = 0.09;
  *   ao lado da logo; no fim, perto do rodapé.
  * - Movimento só com transform (sem layout shift), atualizado em requestAnimationFrame
  *   com um pouco de inércia, balanço lateral e inclinação na direção do movimento.
- * - Mobile (400–639px): menor, mais transparente e encostado na borda, parando acima da
- *   barra fixa de CTA. Abaixo de 400px fica escondido (a margem lateral é estreita demais).
+ * - Só a partir de 768px (tablet e desktop). No mobile fica escondido e o script não roda.
  * - Com prefers-reduced-motion, fica parado ao lado da logo.
  */
 export function FloatingBalloon() {
@@ -25,6 +26,7 @@ export function FloatingBalloon() {
     const element = ref.current;
     if (!element) return;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const large = window.matchMedia(`(min-width: ${MIN_WIDTH}px)`);
 
     let x = 0;
     let startY = 0;
@@ -41,17 +43,13 @@ export function FloatingBalloon() {
       const width = element.offsetWidth;
       const height = element.offsetHeight;
       const wide = window.innerWidth >= 1280;
-      const phone = window.innerWidth < 640;
-      const gap = wide ? 40 : phone ? 4 : 8;
+      const gap = wide ? 40 : 8;
       const logoLeft = logo?.getBoundingClientRect().left ?? 32;
-      // Barra fixa de CTA (só existe visualmente no mobile): o balão para acima dela.
-      const ctaBar = document.querySelector<HTMLElement>("[data-cta-bar]");
-      const reservedBottom = ctaBar?.offsetHeight ? ctaBar.offsetHeight + 12 : BOTTOM_GAP;
 
-      x = Math.max(phone ? 1 : 4, logoLeft - width - gap);
-      swayAmplitude = wide ? 8 : phone ? 1.5 : 3;
+      x = Math.max(4, logoLeft - width - gap);
+      swayAmplitude = wide ? 8 : 3;
       startY = Math.max(4, ((header?.offsetHeight ?? 64) - height) / 2);
-      endY = Math.max(startY, window.innerHeight - height - reservedBottom);
+      endY = Math.max(startY, window.innerHeight - height - BOTTOM_GAP);
       maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
     };
 
@@ -84,13 +82,14 @@ export function FloatingBalloon() {
     };
 
     const onScroll = () => {
-      if (reducedMotion.matches) return;
+      if (reducedMotion.matches || !large.matches) return;
       target = Math.min(1, Math.max(0, window.scrollY / maxScroll));
       requestTick();
     };
 
     let initialized = false;
     const onResize = () => {
+      if (!large.matches) return;
       measure();
       if (!initialized) {
         // Primeira medição: posiciona direto, sem animar a partir do topo.
@@ -125,7 +124,7 @@ export function FloatingBalloon() {
     <div
       ref={ref}
       aria-hidden="true"
-      className="pointer-events-none fixed top-0 left-0 z-[45] hidden w-3.5 opacity-0 transition-opacity duration-500 will-change-transform data-[ready]:opacity-50 min-[400px]:block sm:w-5 sm:data-[ready]:opacity-75 xl:w-10 xl:data-[ready]:opacity-100"
+      className="pointer-events-none fixed top-0 left-0 z-[45] hidden w-5 opacity-0 transition-opacity duration-500 will-change-transform data-[ready]:opacity-75 md:block xl:w-10 xl:data-[ready]:opacity-100"
       style={{ transformOrigin: "50% 40%" }}
     >
       <svg viewBox="0 0 40 72" className="block w-full overflow-visible motion-safe:animate-balloon-bob">

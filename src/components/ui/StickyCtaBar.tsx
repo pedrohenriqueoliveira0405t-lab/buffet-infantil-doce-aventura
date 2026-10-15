@@ -50,7 +50,6 @@ export function StickyCtaBar({ children }: { children: ReactNode }) {
 
   return (
     <div
-      data-cta-bar
       inert={!visible}
       className={cn(
         "fixed inset-x-0 bottom-0 z-50 bg-warm-white px-2.5 pt-3 min-[375px]:px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-[0_-10px_30px_-12px_rgb(35_94_131/0.3)] transition-transform duration-300 ease-out motion-reduce:transition-none md:hidden",

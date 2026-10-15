@@ -12,10 +12,13 @@ e gere de novo os favicons `src/app/icon.png` e `src/app/apple-icon.png`.
 | `imagens_site/brinquedoteca/` | O espaço → Brinquedoteca | Slideshow automático |
 | `imagens_site/baby/` | O espaço → Área baby | Foto fixa |
 | `imagens_site/adulto/` | O espaço → Espaço gourmet adulto | Slideshow automático |
+| `imagens_site/imagens_fml_confiam/` | Famílias que confiam em nós (mosaico com 7 temas) | Foto fixa em cada bloco |
 
 Para adicionar, trocar ou remover uma foto: coloque o arquivo na pasta e ajuste a lista
 correspondente no `src/content/site.ts` (`hero.images` ou `space.areas[].images`), com um
 texto alternativo (`alt`) que descreva a foto. Uma foto fica fixa; duas ou mais viram slideshow.
+No mosaico das famílias (`families.parties`), a 1ª foto ocupa um bloco alto (prefira vertical), a 5ª
+também fica alta a partir de 768px (quadrada funciona bem) e as demais ficam em blocos quadrados ou horizontais.
 A primeira foto de `hero.images` é a que carrega com prioridade.
 
 ## Ainda com placeholder
@@ -24,7 +27,6 @@ A primeira foto de `hero.images` é a que carrega com prioridade.
 |---|---|---|
 | `equipe-renata.jpg`, `equipe-juliana.jpg`, `equipe-camila.jpg`, `equipe-patricia.jpg` | Quem cuida da sua festa | 4:5 |
 | `depoimento-jardim-encantado.jpg` | Depoimento em destaque | 4:3 |
-| `festa-*.jpg` (7 temas) | Famílias que confiam em nós | 1:1 a 16:10 |
 
 Para ativar: salve com o nome indicado em `src` no `site.ts` e mude `ready: false` para `ready: true`.
 

@@ -90,11 +90,12 @@ export function Packages() {
                 ))}
               </ul>
 
+              {/* Com o mouse em cima, o botão muda para menta (o mesmo tom dos checks da lista). */}
               <WhatsAppCta
                 cta={item.cta}
                 variant={item.featured ? "primary" : "secondary"}
                 size="lg"
-                className="mt-6 w-full sm:mt-7"
+                className="mt-6 w-full hover:bg-mint hover:text-deep-blue sm:mt-7"
               />
             </li>
           ))}

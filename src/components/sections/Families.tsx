@@ -5,15 +5,24 @@ import { Photo } from "@/components/ui/Photo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { WhatsAppCta } from "@/components/ui/WhatsAppCta";
 
-// Mosaico 4x3 no desktop; no mobile, 1 foto larga + 6 quadradas em 2 colunas.
-const tileLayout = [
-  "col-span-2 aspect-[16/10] lg:col-span-2 lg:row-span-2 lg:aspect-auto",
-  "aspect-square lg:aspect-auto",
-  "aspect-square lg:row-span-2 lg:aspect-auto",
-  "aspect-square lg:aspect-auto",
-  "aspect-square lg:aspect-auto",
-  "aspect-square lg:col-span-2 lg:aspect-auto",
-  "aspect-square lg:aspect-auto",
+// Mosaico pensado para as proporções das fotos (a 1ª é vertical; as demais, horizontais ou quadradas).
+// Mobile: 2 colunas, a 1ª foto alta + 6 quadradas. A partir de 768px: 3x3, com a 1ª e a 5ª altas.
+// `sizes` considera o recorte (object-cover): nos blocos altos a foto é exibida mais larga que o bloco.
+const SQUARE = {
+  className: "aspect-square md:aspect-auto",
+  sizes: "(min-width: 1152px) 380px, (min-width: 768px) 40vw, 60vw",
+};
+const tiles = [
+  { className: "row-span-2", sizes: "(min-width: 1152px) 400px, (min-width: 768px) 50vw, 85vw" },
+  SQUARE,
+  SQUARE,
+  SQUARE,
+  {
+    className: "aspect-square md:row-span-2 md:aspect-auto",
+    sizes: "(min-width: 1152px) 470px, 60vw",
+  },
+  SQUARE,
+  SQUARE,
 ];
 
 /** Famílias que confiam em nós: mosaico de festas reais (decoração, sem crianças identificáveis). */
@@ -29,19 +38,23 @@ export function Families() {
           align="center"
         />
 
-        <ul className="mt-section-gap grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:auto-rows-[13rem]">
+        <ul className="mt-section-gap grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 md:auto-rows-[14rem]">
           {families.parties.map((party, index) => (
-            <li key={party.theme} className={cn("reveal group relative overflow-hidden rounded-3xl", tileLayout[index])}>
+            <li
+              key={party.theme}
+              className={cn("reveal group relative overflow-hidden rounded-3xl", (tiles[index] ?? SQUARE).className)}
+            >
               {/* FOTO REAL: veja `families.parties[].image` em site.ts */}
               <Photo
                 image={party.image}
                 compactLabel
-                sizes="(min-width: 1024px) 25vw, 50vw"
+                sizes={(tiles[index] ?? SQUARE).sizes}
                 className="h-full w-full transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.04]"
               />
-              <p className="absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] rounded-full bg-warm-white/95 px-3.5 py-1.5 text-sm shadow-soft">
+              {/* Mobile: etiqueta mais justa, para "Jardim Encantado" caber numa linha em 360px. */}
+              <p className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-full bg-warm-white/95 px-2.5 py-1 text-[13px] shadow-soft sm:bottom-3 sm:left-3 sm:max-w-[calc(100%-1.5rem)] sm:px-3.5 sm:py-1.5 sm:text-sm">
                 <span className="font-semibold text-deep-blue">{party.theme}</span>
-                <span className="hidden text-graphite/85 sm:inline"> · {party.child}</span>
+                <span className="hidden text-graphite/85 lg:inline"> · {party.child}</span>
               </p>
             </li>
           ))}
