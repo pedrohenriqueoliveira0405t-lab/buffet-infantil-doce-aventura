@@ -21,6 +21,9 @@ interface PhotoSlideshowProps {
   controlsClassName?: string;
 }
 
+/** Duração do esmaecimento entre fotos (igual à classe duration-700). */
+const FADE_MS = 700;
+
 const subscribeReducedMotion = (onChange: () => void) => {
   const query = window.matchMedia("(prefers-reduced-motion: reduce)");
   query.addEventListener("change", onChange);
@@ -56,6 +59,8 @@ export function PhotoSlideshow({
   const ready = images.filter((image) => image.ready);
   const count = ready.length;
   const [index, setIndex] = useState(0);
+  /** Foto anterior: fica visível por baixo enquanto a nova aparece (sem "piscar" o fundo). */
+  const [previous, setPrevious] = useState<number | null>(null);
   /** Maior índice já montado no DOM (carregamento progressivo). */
   const [revealed, setRevealed] = useState(0);
   const [userPaused, setUserPaused] = useState<boolean | null>(null);
@@ -97,7 +102,8 @@ export function PhotoSlideshow({
 
   const advance = () => {
     waitingRef.current = false;
-    setIndex((value) => (value + 1) % count);
+    setPrevious(index);
+    setIndex((index + 1) % count);
     // Já monta a seguinte, para ela carregar enquanto esta aparece.
     setRevealed((value) => Math.min(count - 1, value + 1));
   };
@@ -108,6 +114,14 @@ export function PhotoSlideshow({
     if (i === 0) setRevealed((value) => Math.max(value, Math.min(1, count - 1)));
     if (waitingRef.current && i === next) advance();
   };
+
+  // Terminada a transição, a anterior sai de baixo (com 2 fotos, ela é a próxima a entrar
+  // e precisa estar transparente para aparecer suavemente).
+  useEffect(() => {
+    if (previous === null) return;
+    const timer = window.setTimeout(() => setPrevious(null), FADE_MS + 100);
+    return () => window.clearTimeout(timer);
+  }, [previous]);
 
   // Avanço automático: espera o tempo da foto e só troca se a próxima já carregou.
   useEffect(() => {
@@ -159,9 +173,10 @@ export function PhotoSlideshow({
             onLoad={() => onImageDone(i)}
             onError={() => onImageDone(i)}
             aria-hidden={i !== index}
+            // A atual aparece por cima da anterior, que continua opaca embaixo até a próxima troca.
             className={cn(
               "object-cover transition-opacity duration-700 ease-out motion-reduce:transition-none",
-              i === index ? "opacity-100" : "opacity-0",
+              i === index ? "z-[2] opacity-100" : i === previous ? "z-[1] opacity-100" : "opacity-0",
             )}
           />
         ) : null,
