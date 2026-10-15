@@ -27,8 +27,8 @@ export function Testimonials() {
             {/* FOTO REAL: veja `testimonials.featured.image` em site.ts */}
             <Photo
               image={featured.image}
-              sizes={`(min-width: 1024px) 500px, (min-width: 640px) 100vw, ${phoneWidth("100vw")}`}
-              className="aspect-[16/9] sm:aspect-[4/3] lg:aspect-auto lg:min-h-[24rem]"
+              sizes={`(min-width: 1024px) 500px, (min-width: 640px) calc(100vw - 6rem), ${phoneWidth("(100vw - 3.5rem)")}`}
+              className="aspect-[4/3] lg:aspect-auto lg:min-h-[24rem]"
             />
             <div className="flex flex-col justify-center p-5 sm:p-10">
               <Quote aria-hidden="true" className="size-7 text-pastel-pink sm:size-9" strokeWidth={1.5} />

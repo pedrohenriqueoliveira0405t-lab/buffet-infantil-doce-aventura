@@ -648,9 +648,9 @@ export const testimonials = {
     quote:
       "Eu tinha medo de passar a festa resolvendo problemas. Não resolvi nenhum. A coordenadora sabia o nome de cada convidado, a decoração ficou mais bonita do que as referências que levei e eu consegui cantar parabéns abraçada na Helena, sem pensar em mais nada.",
     image: {
-      src: "/images/depoimento-jardim-encantado.jpg",
-      ready: false,
-      alt: "Mesa principal da festa com tema Jardim Encantado, com flores, borboletas de papel e bolo de três andares",
+      src: "/images/imagens_site/depoimentos/Imagem do ChatGPT 15 de out. de 2026, 15_20_23.png",
+      ready: true,
+      alt: "Decoração tema Jardim Encantado em tons de rosa, com bolo de andares, flores, borboletas, cogumelo e o nome Helena com o número 5 em neon",
       label: "Festa Jardim Encantado",
       tone: "pink",
       icon: "cake",

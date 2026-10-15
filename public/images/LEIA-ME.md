@@ -13,6 +13,7 @@ e gere de novo os favicons `src/app/icon.png` e `src/app/apple-icon.png`.
 | `imagens_site/baby/` | O espaço → Área baby | Foto fixa |
 | `imagens_site/adulto/` | O espaço → Espaço gourmet adulto | Slideshow automático |
 | `imagens_site/imagens_fml_confiam/` | Famílias que confiam em nós (mosaico com 7 temas) | Foto fixa em cada bloco |
+| `imagens_site/depoimentos/` | Depoimentos → depoimento em destaque (`testimonials.featured.image`) | Foto fixa |
 
 Para adicionar, trocar ou remover uma foto: coloque o arquivo na pasta e ajuste a lista
 correspondente no `src/content/site.ts` (`hero.images` ou `space.areas[].images`), com um
@@ -26,7 +27,6 @@ A primeira foto de `hero.images` é a que carrega com prioridade.
 | Arquivo esperado | Onde aparece | Proporção |
 |---|---|---|
 | `equipe-renata.jpg`, `equipe-juliana.jpg`, `equipe-camila.jpg`, `equipe-patricia.jpg` | Quem cuida da sua festa | 4:5 |
-| `depoimento-jardim-encantado.jpg` | Depoimento em destaque | 4:3 |
 
 Para ativar: salve com o nome indicado em `src` no `site.ts` e mude `ready: false` para `ready: true`.
 
