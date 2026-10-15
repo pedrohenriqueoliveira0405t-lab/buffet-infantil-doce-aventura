@@ -6,7 +6,6 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { Header } from "@/components/sections/Header";
 import { Hero } from "@/components/sections/Hero";
-import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Location } from "@/components/sections/Location";
 import { Packages } from "@/components/sections/Packages";
 import { Safety } from "@/components/sections/Safety";
@@ -33,24 +32,23 @@ import { WhatsAppDock } from "@/components/ui/WhatsAppDock";
  *  3. Por que nos escolher  Diferenciais concretos, não adjetivos.
  *  4. O espaço ........... Prova visual do alto padrão (o que o Instagram mais valoriza).
  *  5. Quem cuida ......... [novo] Pessoas com credencial por trás da experiência. Alto padrão
- *                          é sobre confiar em quem executa; vem antes do método e do preço.
- *  6. Como funciona ...... Método em 4 etapas: mostra profissionalismo e reduz o "dá trabalho?".
+ *                          é sobre confiar em quem executa; vem antes do preço.
  *
  * Decisão: preço e, logo em seguida, redução de risco e prova social.
- *  7. Pacotes ............ Ancoragem no Fantasia.
- *  8. Compromissos ....... [novo] Garantias por contrato imediatamente após o preço, que é
+ *  6. Pacotes ............ Ancoragem no Fantasia.
+ *  7. Compromissos ....... [novo] Garantias por contrato imediatamente após o preço, que é
  *                          quando a objeção "será que vale?" é mais forte.
- *  9. Depoimentos ........ Prova social qualificada (nome, cidade, idade, tema) + selo Google.
- * 10. Famílias ........... [novo] Mosaico de festas: volume e variedade reforçam as 1.800 festas.
- * 11. Segurança .......... Selos e credenciais técnicas: responde à objeção mais emocional
+ *  8. Depoimentos ........ Prova social qualificada (nome, cidade, idade, tema) + selo Google.
+ *  9. Famílias ........... [novo] Mosaico de festas: volume e variedade reforçam as 1.800 festas.
+ * 10. Segurança .......... Selos e credenciais técnicas: responde à objeção mais emocional
  *                          dos pais depois que eles já desejam a festa.
  *
  * Fechamento: urgência honesta, dúvidas finais e ação.
- * 12. Agenda ............. Escassez real (uma festa por vez = poucos horários).
- * 13. FAQ ................ Remove as últimas objeções práticas.
- * 14. CTA final .......... Apelo emocional + botão.
- * 15. Localização ........ Endereço, horário de visitas e mapa.
- * 16. Rodapé
+ * 11. Agenda ............. Escassez real (uma festa por vez = poucos horários).
+ * 12. FAQ ................ Remove as últimas objeções práticas.
+ * 13. CTA final .......... Apelo emocional + botão.
+ * 14. Localização ........ Endereço, horário de visitas e mapa.
+ * 15. Rodapé
  */
 export default function Home() {
   return (
@@ -66,7 +64,6 @@ export default function Home() {
         <WhyUs />
         <Space />
         <Team />
-        <HowItWorks />
         <Packages />
         <Commitments />
         <Testimonials />

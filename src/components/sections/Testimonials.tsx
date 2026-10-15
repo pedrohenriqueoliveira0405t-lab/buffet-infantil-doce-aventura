@@ -52,6 +52,7 @@ export function Testimonials() {
             itemLabels={testimonials.items.map((item) => `depoimento de ${item.name}`)}
             previousLabel={testimonials.previousLabel}
             nextLabel={testimonials.nextLabel}
+            autoplay={6000}
             className="mt-4 sm:mt-6"
           >
             {testimonials.items.map((item) => (

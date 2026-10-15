@@ -21,7 +21,6 @@ import type {
   SiteImage,
   SpaceArea,
   Stat,
-  Step,
   TeamMember,
   Testimonial,
 } from "./types";
@@ -166,11 +165,6 @@ export const ctas = {
     label: "Conhecer a equipe na visita",
     location: "equipe",
     message: "Olá! Gostaria de agendar uma visita para conhecer o espaço e a equipe que cuida das festas.",
-  },
-  howItWorks: {
-    label: "Agendar minha visita",
-    location: "como_funciona",
-    message: "Olá! Quero dar o primeiro passo e agendar uma visita ao buffet.",
   },
   families: {
     label: "Conhecer o espaço",
@@ -523,39 +517,7 @@ export const team = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* 6. Como funciona                                                            */
-/* -------------------------------------------------------------------------- */
-
-export const howItWorks = {
-  eyebrow: "Como funciona",
-  title: `Um método testado em mais de *${fmt(numbers.parties)} festas*`,
-  description: "Do primeiro contato ao pós-festa, você sabe exatamente o que acontece em cada etapa.",
-  steps: [
-    {
-      title: "Agende sua visita",
-      text: "Fale com a gente pelo WhatsApp e escolha um horário. A visita é guiada pela coordenadora e reservada só para a sua família.",
-      meta: "Cerca de 1 hora",
-    },
-    {
-      title: "Escolha o pacote e o tema",
-      text: "Na reunião de alinhamento, definimos pacote, tema e roteiro. Antes da festa, você prova o cardápio na degustação.",
-      meta: "Reunião + degustação",
-    },
-    {
-      title: "Nós cuidamos de tudo",
-      text: "Ateliê, cozinha e recreação preparam cada detalhe. Sua coordenadora confirma horários, fornecedores e lista de convidados.",
-      meta: "Atualizações no WhatsApp",
-    },
-    {
-      title: "Aproveite a festa",
-      text: "No dia, você chega e vive a festa com seu filho. Na semana seguinte, a coordenadora liga para ouvir como foi.",
-      meta: "Pós-festa com avaliação",
-    },
-  ] satisfies Step[],
-};
-
-/* -------------------------------------------------------------------------- */
-/* 7. Pacotes                                                                  */
+/* 6. Pacotes                                                                  */
 /* -------------------------------------------------------------------------- */
 
 export const packages = {
@@ -628,7 +590,7 @@ export const packages = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* 8. Compromissos (redução de risco)                                          */
+/* 7. Compromissos (redução de risco)                                          */
 /* -------------------------------------------------------------------------- */
 
 export const commitments = {
@@ -668,7 +630,7 @@ export const commitments = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* 9. Depoimentos (fictícios)                                                  */
+/* 8. Depoimentos (fictícios)                                                  */
 /* -------------------------------------------------------------------------- */
 
 export const testimonials = {
@@ -744,7 +706,7 @@ export const testimonials = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* 10. Famílias que confiam em nós (mosaico)                                   */
+/* 9. Famílias que confiam em nós (mosaico)                                    */
 /* -------------------------------------------------------------------------- */
 
 // Fotos de decoração e ambientes, sem crianças identificáveis.
@@ -841,7 +803,7 @@ export const families = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* 11. Segurança e credenciais                                                 */
+/* 10. Segurança e credenciais                                                 */
 /* -------------------------------------------------------------------------- */
 
 export const safety = {
@@ -898,7 +860,7 @@ export const safety = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* 12. Agenda (escassez honesta)                                               */
+/* 11. Agenda (escassez honesta)                                               */
 /* -------------------------------------------------------------------------- */
 
 export const schedule = {
@@ -914,7 +876,7 @@ export const schedule = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* 13. FAQ                                                                     */
+/* 12. FAQ                                                                     */
 /* -------------------------------------------------------------------------- */
 
 export const faq = {
@@ -964,7 +926,7 @@ export const faq = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* 14. CTA final                                                               */
+/* 13. CTA final                                                               */
 /* -------------------------------------------------------------------------- */
 
 export const finalCta = {
@@ -975,7 +937,7 @@ export const finalCta = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* 15. Localização                                                             */
+/* 14. Localização                                                             */
 /* -------------------------------------------------------------------------- */
 
 export const location = {

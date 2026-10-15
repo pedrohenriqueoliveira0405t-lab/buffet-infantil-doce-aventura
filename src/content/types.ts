@@ -108,12 +108,6 @@ export interface TeamMember {
   image: SiteImage;
 }
 
-export interface Step {
-  title: string;
-  text: string;
-  meta: string;
-}
-
 export interface Package {
   id: string;
   name: string;

@@ -21,7 +21,7 @@ const SIZES = "(min-width: 768px) 50vw, 85vw";
 /**
  * O espaço: galeria das áreas, com especificações concretas.
  * Áreas com mais de uma foto viram slideshow automático; com uma, foto fixa.
- * Mobile: carrossel com swipe (card de ~85% + pedaço do próximo), legenda abaixo da foto.
+ * Mobile: carrossel com swipe e rolagem automática (card de ~85% + pedaço do próximo), legenda abaixo da foto.
  * Tablet/desktop: grade em mosaico com a legenda sobre a foto.
  */
 export function Space() {
@@ -39,6 +39,7 @@ export function Space() {
           <Carousel
             label="Áreas do espaço"
             itemLabels={space.areas.map((area) => area.name)}
+            autoplay={4000}
             className="mt-section-gap"
             controlsClassName="md:hidden"
             listClassName="md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:pt-0 md:pb-0 lg:grid-cols-4 lg:grid-rows-[18rem_18rem]"

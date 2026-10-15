@@ -34,7 +34,7 @@ const subscribeVisibility = (onChange: () => void) => {
 /**
  * Fotos que passam sozinhas, com troca por esmaecimento (só opacidade).
  *
- * - Pausa fora da tela, com a aba em segundo plano e com o mouse ou o foco em cima.
+ * - Pausa fora da tela, com a aba em segundo plano e com o mouse ou o foco do teclado em cima.
  * - Botão de pausar/continuar (acessibilidade: conteúdo que se move sozinho precisa de pausa).
  * - Com prefers-reduced-motion, não começa sozinho; o visitante pode apertar "continuar".
  * - Só a primeira foto carrega com a página; a próxima é buscada depois que a página termina
@@ -123,7 +123,10 @@ export function PhotoSlideshow({
       aria-label={count > 1 ? label : undefined}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      onFocus={() => setFocused(true)}
+      onFocus={(event) => {
+        // Só o foco por teclado pausa (tocar no botão também dá foco e não deve impedir o "continuar").
+        if (event.target.matches(":focus-visible")) setFocused(true);
+      }}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setFocused(false);
       }}
