@@ -31,7 +31,8 @@ export function Photo({
 }) {
   if (image.ready) {
     return (
-      <div className={cn("relative overflow-hidden", className)}>
+      // Fundo no tom da foto enquanto ela carrega (em vez de um espaço em branco).
+      <div className={cn("relative overflow-hidden", toneClasses[image.tone].soft, className)}>
         <Image src={image.src} alt={image.alt} fill sizes={sizes} preload={preload} className="object-cover" />
       </div>
     );

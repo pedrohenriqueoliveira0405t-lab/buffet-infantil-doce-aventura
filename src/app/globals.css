@@ -186,7 +186,8 @@
     .reveal {
       animation: reveal-up linear both;
       animation-timeline: view();
-      animation-range: entry 0% entry 55%;
+      /* Distância fixa (e curta): fotos altas ficam 100% visíveis logo depois de entrar na tela. */
+      animation-range: entry 0px entry 80px;
     }
   }
 }

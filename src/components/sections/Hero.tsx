@@ -1,5 +1,6 @@
 import { Sparkles } from "lucide-react";
 import { ctas, hero, rating } from "@/content/site";
+import { phoneWidth } from "@/lib/image-sizes";
 import { Container } from "@/components/ui/Layout";
 import { PhotoSlideshow } from "@/components/ui/PhotoSlideshow";
 import { Stars } from "@/components/ui/Rating";
@@ -69,7 +70,7 @@ export function Hero() {
             images={hero.images}
             label={hero.imagesLabel}
             preloadFirst
-            sizes="(min-width: 1024px) 540px, 100vw"
+            sizes={`(min-width: 1024px) 540px, (min-width: 640px) calc(100vw - 4rem), ${phoneWidth("(100vw - 2.5rem)")}`}
             className="aspect-[4/3] rounded-[2rem] shadow-soft sm:aspect-[16/10] sm:rounded-[2.5rem] sm:shadow-lift lg:aspect-square"
           />
 

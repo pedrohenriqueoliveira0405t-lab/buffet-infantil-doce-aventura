@@ -37,8 +37,10 @@ const subscribeVisibility = (onChange: () => void) => {
  * - Pausa fora da tela, com a aba em segundo plano e com o mouse ou o foco do teclado em cima.
  * - Botão de pausar/continuar (acessibilidade: conteúdo que se move sozinho precisa de pausa).
  * - Com prefers-reduced-motion, não começa sozinho; o visitante pode apertar "continuar".
- * - Só a primeira foto carrega com a página; a próxima é buscada depois que a página termina
- *   de carregar, e as demais conforme o slideshow avança.
+ * - Só a primeira foto carrega com a página; a próxima é buscada assim que a primeira aparece,
+ *   e as demais conforme o slideshow avança (sempre uma à frente).
+ * - Só troca para uma foto que já carregou: em rede lenta, a foto atual fica um pouco mais,
+ *   em vez de aparecer um quadro vazio.
  */
 export function PhotoSlideshow({
   images,
@@ -87,30 +89,40 @@ export function PhotoSlideshow({
     return () => observer.disconnect();
   }, [count]);
 
-  // Depois que a página carrega, deixa a próxima foto pronta.
-  useEffect(() => {
-    if (count < 2) return;
-    let idle = 0;
-    const warm = () => {
-      idle = window.setTimeout(() => setRevealed((value) => Math.max(value, 1)), 300);
-    };
-    if (document.readyState === "complete") warm();
-    else window.addEventListener("load", warm, { once: true });
-    return () => {
-      window.clearTimeout(idle);
-      window.removeEventListener("load", warm);
-    };
-  }, [count]);
+  /** Fotos que já terminaram de carregar (ou falharam: não travam o slideshow). */
+  const loadedRef = useRef(new Set<number>());
+  /** O tempo da foto atual acabou, mas a próxima ainda está carregando. */
+  const waitingRef = useRef(false);
+  const next = count > 0 ? (index + 1) % count : 0;
 
-  // Avanço automático.
+  const advance = () => {
+    waitingRef.current = false;
+    setIndex((value) => (value + 1) % count);
+    // Já monta a seguinte, para ela carregar enquanto esta aparece.
+    setRevealed((value) => Math.min(count - 1, value + 1));
+  };
+
+  const onImageDone = (i: number) => {
+    loadedRef.current.add(i);
+    // A primeira apareceu: começa a buscar a segunda.
+    if (i === 0) setRevealed((value) => Math.max(value, Math.min(1, count - 1)));
+    if (waitingRef.current && i === next) advance();
+  };
+
+  // Avanço automático: espera o tempo da foto e só troca se a próxima já carregou.
   useEffect(() => {
     if (!playing) return;
-    const timer = window.setInterval(() => {
-      setIndex((value) => (value + 1) % count);
-      setRevealed((value) => Math.min(count - 1, value + 1));
+    const timer = window.setTimeout(() => {
+      if (loadedRef.current.has((index + 1) % count)) advance();
+      else waitingRef.current = true;
     }, interval);
-    return () => window.clearInterval(timer);
-  }, [playing, count, interval]);
+    return () => {
+      window.clearTimeout(timer);
+      waitingRef.current = false;
+    };
+    // `advance` só usa setters e refs.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playing, index, count, interval]);
 
   if (count === 0) return null;
   const limit = Math.max(revealed, index);
@@ -141,6 +153,11 @@ export function PhotoSlideshow({
             fill
             sizes={sizes}
             preload={preloadFirst && i === 0}
+            // As seguintes só entram no DOM quando vão ser usadas: carregam na hora (lazy as
+            // seguraria dentro de carrosséis, até o card aparecer).
+            loading={i === 0 ? undefined : "eager"}
+            onLoad={() => onImageDone(i)}
+            onError={() => onImageDone(i)}
             aria-hidden={i !== index}
             className={cn(
               "object-cover transition-opacity duration-700 ease-out motion-reduce:transition-none",

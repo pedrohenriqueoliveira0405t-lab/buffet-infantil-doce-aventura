@@ -1,5 +1,6 @@
 import { ctas, families } from "@/content/site";
 import { cn } from "@/lib/cn";
+import { phoneWidth } from "@/lib/image-sizes";
 import { Container, Section } from "@/components/ui/Layout";
 import { Photo } from "@/components/ui/Photo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -10,16 +11,16 @@ import { WhatsAppCta } from "@/components/ui/WhatsAppCta";
 // `sizes` considera o recorte (object-cover): nos blocos altos a foto é exibida mais larga que o bloco.
 const SQUARE = {
   className: "aspect-square md:aspect-auto",
-  sizes: "(min-width: 1152px) 380px, (min-width: 768px) 40vw, 60vw",
+  sizes: `(min-width: 1152px) 380px, (min-width: 768px) 40vw, ${phoneWidth("60vw")}`,
 };
 const tiles = [
-  { className: "row-span-2", sizes: "(min-width: 1152px) 400px, (min-width: 768px) 50vw, 85vw" },
+  { className: "row-span-2", sizes: `(min-width: 1152px) 400px, (min-width: 768px) 50vw, ${phoneWidth("85vw")}` },
   SQUARE,
   SQUARE,
   SQUARE,
   {
     className: "aspect-square md:row-span-2 md:aspect-auto",
-    sizes: "(min-width: 1152px) 470px, 60vw",
+    sizes: `(min-width: 1152px) 470px, (min-width: 768px) 60vw, ${phoneWidth("60vw")}`,
   },
   SQUARE,
   SQUARE,

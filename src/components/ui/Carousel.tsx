@@ -160,6 +160,27 @@ export function Carousel({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Fotos de itens fora da tela (à direita) só carregariam quando o item entrasse na lista
+  // (o lazy loading do navegador não enxerga além da borda do carrossel). Quando o carrossel
+  // se aproxima da tela, elas passam a carregar na hora, sem esperar o arraste ou a rolagem automática.
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        list.querySelectorAll<HTMLImageElement>('img[loading="lazy"]').forEach((img) => {
+          img.loading = "eager";
+        });
+        observer.disconnect();
+      },
+      // Mesma antecedência que o Chrome usa no lazy loading em 4G.
+      { rootMargin: "1250px 0px" },
+    );
+    observer.observe(list);
+    return () => observer.disconnect();
+  }, []);
+
   // Visibilidade da lista na tela (só importa com rolagem automática).
   useEffect(() => {
     const list = listRef.current;

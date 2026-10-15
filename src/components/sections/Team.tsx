@@ -1,5 +1,6 @@
 import { Quote } from "lucide-react";
 import { ctas, team } from "@/content/site";
+import { phoneWidth } from "@/lib/image-sizes";
 import { Container, Section } from "@/components/ui/Layout";
 import { Photo } from "@/components/ui/Photo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -35,7 +36,7 @@ export function Team() {
               <Photo
                 image={member.image}
                 compactLabel
-                sizes="(min-width: 1024px) 270px, 50vw"
+                sizes={`(min-width: 1024px) 270px, (min-width: 640px) 50vw, ${phoneWidth("50vw")}`}
                 className="aspect-[4/5] rounded-3xl sm:rounded-[1.75rem]"
               />
               <h3 className="mt-3 font-display text-lg leading-tight font-semibold text-deep-blue sm:mt-4 sm:text-xl">

@@ -1,5 +1,6 @@
 import { ctas, space } from "@/content/site";
 import { cn } from "@/lib/cn";
+import { phoneWidth } from "@/lib/image-sizes";
 import { Carousel } from "@/components/ui/Carousel";
 import { Container, Panel, Section } from "@/components/ui/Layout";
 import { Photo } from "@/components/ui/Photo";
@@ -16,7 +17,7 @@ const tileAspect = [
   "md:aspect-[4/3] lg:aspect-auto",
 ];
 
-const SIZES = "(min-width: 768px) 50vw, 85vw";
+const SIZES = `(min-width: 768px) 50vw, ${phoneWidth("85vw")}`;
 
 /**
  * O espaço: galeria das áreas, com especificações concretas.

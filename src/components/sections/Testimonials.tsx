@@ -1,5 +1,6 @@
 import { Quote } from "lucide-react";
 import { testimonials } from "@/content/site";
+import { phoneWidth } from "@/lib/image-sizes";
 import { Carousel } from "@/components/ui/Carousel";
 import { Container, Panel, Section } from "@/components/ui/Layout";
 import { Photo } from "@/components/ui/Photo";
@@ -26,7 +27,7 @@ export function Testimonials() {
             {/* FOTO REAL: veja `testimonials.featured.image` em site.ts */}
             <Photo
               image={featured.image}
-              sizes="(min-width: 1024px) 500px, 100vw"
+              sizes={`(min-width: 1024px) 500px, (min-width: 640px) 100vw, ${phoneWidth("100vw")}`}
               className="aspect-[16/9] sm:aspect-[4/3] lg:aspect-auto lg:min-h-[24rem]"
             />
             <div className="flex flex-col justify-center p-5 sm:p-10">
