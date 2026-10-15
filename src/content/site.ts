@@ -253,14 +253,52 @@ export const hero = {
     title: "Uma festa por vez",
     text: "O espaço inteiro só para o seu filho",
   },
-  image: {
-    src: "/images/hero-salao-decorado.jpg",
-    ready: false,
-    alt: "Salão principal decorado em tons pastel, com mesa de doces finos e arranjos de flores, pronto para receber os convidados",
-    label: "Salão principal decorado",
-    tone: "blue",
-    icon: "castle",
-  } satisfies SiteImage,
+  /** Fotos do topo (passam sozinhas). A primeira é a que carrega com prioridade. */
+  images: [
+    {
+      src: "/images/imagens_site/uma_por_vez/Festa Baby Shark no fundo do mar.png",
+      ready: true,
+      alt: "Mesa de festa no tema fundo do mar, com arco de balões azuis, cortina de luzes e personagens do Baby Shark",
+      label: "Festa Baby Shark",
+      tone: "blue",
+    },
+    {
+      src: "/images/imagens_site/uma_por_vez/Mesa de doces do circo do Eduardo.png",
+      ready: true,
+      alt: "Mesa principal com tema circo, cortina vermelha, letreiro luminoso com o nome do aniversariante e bolo de três andares",
+      label: "Festa O Circo",
+      tone: "yellow",
+    },
+    {
+      src: "/images/imagens_site/uma_por_vez/Festa Circense Pastel da Betina.png",
+      ready: true,
+      alt: "Decoração de circo em tons pastel, com arco de balões, letreiro iluminado com o nome da aniversariante e bolo de 1 ano",
+      label: "Festa Circo Pastel",
+      tone: "pink",
+    },
+    {
+      src: "/images/imagens_site/uma_por_vez/Festa Masha e o Urso no Jardim.png",
+      ready: true,
+      alt: "Cenário de jardim com tema Masha e o Urso, painel de folhagens, flores de balão e piquenique",
+      label: "Festa Masha e o Urso",
+      tone: "mint",
+    },
+    {
+      src: "/images/imagens_site/uma_por_vez/Mesa de Festa Sonic Colorida e Encantadora.png",
+      ready: true,
+      alt: "Mesa de festa com tema Sonic, arco de balões coloridos e bolo de 7 anos",
+      label: "Festa Sonic",
+      tone: "blue",
+    },
+    {
+      src: "/images/imagens_site/uma_por_vez/Mesa de Doces Circo Colorido.png",
+      ready: true,
+      alt: "Mesa de doces com tema de palhaços, cupcakes coloridos personalizados e cata-ventos",
+      label: "Festa Palhaços",
+      tone: "yellow",
+    },
+  ] satisfies SiteImage[],
+  imagesLabel: "Festas realizadas no buffet",
 };
 
 /* -------------------------------------------------------------------------- */
@@ -349,54 +387,67 @@ export const space = {
   title: `${fmt(numbers.areaM2)} m² pensados para as crianças *e confortáveis para os adultos*`,
   description:
     "Cada ambiente foi projetado para que as crianças brinquem com liberdade e os pais acompanhem tudo de perto, sem sair do conforto.",
+  // Áreas com mais de uma foto viram slideshow automático.
   areas: [
-    {
-      name: "Salão principal",
-      spec: "280 m², pé-direito de 6 m e iluminação cênica",
-      image: {
-        src: "/images/espaco-salao-principal.jpg",
-        ready: false,
-        alt: "Salão principal amplo com pé-direito alto, mesas decoradas e iluminação cênica suave",
-        label: "Salão principal",
-        tone: "blue",
-        icon: "castle",
-      },
-    },
     {
       name: "Brinquedoteca",
       spec: "Tirolesa indoor, cama elástica, piscina de bolinhas e circuito de escalada",
-      image: {
-        src: "/images/espaco-brinquedoteca.jpg",
-        ready: false,
-        alt: "Brinquedoteca com tirolesa indoor, cama elástica com rede de proteção e piscina de bolinhas",
-        label: "Brinquedoteca",
-        tone: "mint",
-        icon: "party",
-      },
+      images: [
+        {
+          src: "/images/imagens_site/brinquedoteca/Escorregadores Coloridos no Piscina de Bolinhas.png",
+          ready: true,
+          alt: "Escorregador de quatro pistas coloridas que termina na piscina de bolinhas",
+          label: "Escorregadores",
+          tone: "mint",
+        },
+        {
+          src: "/images/imagens_site/brinquedoteca/Parque Infantil Colorido e Vibrante.png",
+          ready: true,
+          alt: "Brinquedoteca com estrutura de escalada, carrossel, gangorras e piso emborrachado colorido",
+          label: "Parque infantil",
+          tone: "mint",
+        },
+        {
+          src: "/images/imagens_site/brinquedoteca/Playground Infantil Colorido e Vibrante.png",
+          ready: true,
+          alt: "Área de brinquedos com estrutura suspensa com rede de proteção, roda infantil e mesas para os pais",
+          label: "Playground",
+          tone: "mint",
+        },
+      ],
     },
     {
       name: "Área baby",
       spec: "Espaço acolchoado para crianças de 0 a 3 anos, com monitora exclusiva",
-      image: {
-        src: "/images/espaco-area-baby.jpg",
-        ready: false,
-        alt: "Área baby com piso acolchoado, brinquedos sensoriais e cantos arredondados",
-        label: "Área baby",
-        tone: "pink",
-        icon: "baby",
-      },
+      images: [
+        {
+          src: "/images/imagens_site/baby/Sala Infantil Colorida com Piscina de Bolinhas.png",
+          ready: true,
+          alt: "Sala baby com piscina de bolinhas, piso e paredes acolchoados coloridos e blocos de espuma",
+          label: "Área baby",
+          tone: "pink",
+        },
+      ],
     },
     {
       name: "Espaço gourmet adulto",
       spec: "Lounge climatizado com vista para o salão",
-      image: {
-        src: "/images/espaco-gourmet-adulto.jpg",
-        ready: false,
-        alt: "Lounge adulto com sofás, ilha gastronômica e vista envidraçada para o salão principal",
-        label: "Espaço gourmet adulto",
-        tone: "yellow",
-        icon: "utensils",
-      },
+      images: [
+        {
+          src: "/images/imagens_site/adulto/Recepção Elegante com Balões Azuis e Dourados.png",
+          ready: true,
+          alt: "Salão de recepção com mesas redondas postas, centros de mesa com balões azuis e dourados e lustres",
+          label: "Recepção",
+          tone: "yellow",
+        },
+        {
+          src: "/images/imagens_site/adulto/Festa Infantil com Tema Marinho.png",
+          ready: true,
+          alt: "Salão visto do alto, com mesas para os convidados, mesa decorada no tema marinho e área de brinquedos ao fundo",
+          label: "Salão",
+          tone: "yellow",
+        },
+      ],
     },
   ] satisfies SpaceArea[],
 };

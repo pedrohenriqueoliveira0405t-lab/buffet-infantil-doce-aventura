@@ -1,7 +1,7 @@
 import { Sparkles } from "lucide-react";
 import { ctas, hero, rating } from "@/content/site";
 import { Container } from "@/components/ui/Layout";
-import { Photo } from "@/components/ui/Photo";
+import { PhotoSlideshow } from "@/components/ui/PhotoSlideshow";
 import { Stars } from "@/components/ui/Rating";
 import { Highlight } from "@/components/ui/SectionHeading";
 import { WhatsAppCta } from "@/components/ui/WhatsAppCta";
@@ -64,12 +64,13 @@ export function Hero() {
             aria-hidden="true"
             className="absolute -inset-4 hidden -rotate-2 rounded-[2.75rem] bg-pastel-pink/35 sm:block"
           />
-          {/* FOTO REAL: /public/images/hero-salao-decorado.jpg (veja `hero.image` em site.ts) */}
-          <Photo
-            image={hero.image}
-            preload
-            sizes="(min-width: 1024px) 520px, 100vw"
-            className="aspect-[4/3] rounded-[2rem] shadow-soft sm:aspect-[16/10] sm:rounded-[2.5rem] sm:shadow-lift lg:aspect-[4/5]"
+          {/* Fotos em /public/images/imagens_site/uma_por_vez (lista em `hero.images`, site.ts). */}
+          <PhotoSlideshow
+            images={hero.images}
+            label={hero.imagesLabel}
+            preloadFirst
+            sizes="(min-width: 1024px) 540px, 100vw"
+            className="aspect-[4/3] rounded-[2rem] shadow-soft sm:aspect-[16/10] sm:rounded-[2.5rem] sm:shadow-lift lg:aspect-square"
           />
 
           <div className="absolute -bottom-5 left-3 flex max-w-[calc(100%-1.5rem)] items-center gap-3 rounded-2xl bg-white p-3 shadow-lift ring-1 ring-graphite/5 sm:-bottom-6 sm:left-6 sm:p-5">

@@ -97,7 +97,8 @@ export interface Feature {
 export interface SpaceArea {
   name: string;
   spec: string;
-  image: SiteImage;
+  /** Uma foto fica fixa; duas ou mais viram slideshow automático. */
+  images: SiteImage[];
 }
 
 export interface TeamMember {
